@@ -1,0 +1,25 @@
+extends layout
+
+block main
+  section#edit-ingredient
+    header
+      h2 Editing the cost of "#{ingredient.name}"
+
+    form(action=`/meals/${meal.id}/ingredients/${ingredient.id}/edit-cost` method="post")
+            dl
+              dt
+                label(for="ingredientCost") Enter the new ingredient cost:
+              dd
+                input(type="text"
+                      name="ingredientCost"
+                      id="todoTitle"
+                      placeholder="Ingredient Cost"
+                      value=ingredientCost)
+
+            fieldset.actions
+              input(type="submit" value="Save")
+              a(href=`/meals/${meal.id}`) Cancel
+
+block headerLinks
+  .actions
+    a.list(href="/meals") All Meals

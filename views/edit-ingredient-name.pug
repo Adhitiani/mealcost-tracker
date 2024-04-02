@@ -1,0 +1,25 @@
+extends layout
+
+block main
+  section#edit-ingredient
+    header
+      h2 Editing "#{ingredient.name}" 
+
+    form(action=`/meals/${meal.id}/ingredients/${ingredient.id}/edit-name` method="post")
+            dl
+              dt
+                label(for="ingredientName") Enter the new ingredient name:
+              dd
+                input(type="text"
+                      name="ingredientName"
+                      id="todoTitle"
+                      placeholder="Ingredient Name"
+                      value=ingredientName)
+
+            fieldset.actions
+              input(type="submit" value="Save")
+              a(href=`/meals/${meal.id}`) Cancel
+
+block headerLinks
+  .actions
+    a.list(href="/meals") All Meals

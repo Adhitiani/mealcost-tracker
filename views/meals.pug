@@ -1,0 +1,30 @@
+extends layout
+
+block main
+  if meals === undefined || meals.length === 0
+    p#no_list You haven't added any meals yet.
+  else
+    h1#meal-header Meals Lists
+    ul#lists
+      each meal in meals
+        li(class="")
+          a.meal-name(href=`/meals/${meal.id}?page=${page}`)
+            h2= meal.name
+            if !meal.totalCost
+              p Total cost $ 0.00
+            else 
+              p Total cost $ #{meal.totalCost}
+            form.delete(action=`/meals/${meal.id}/destroy` method="post")
+              button.delete(type="submit") 
+        
+    
+  ul.pagination
+   
+    while page < totalPage + 1
+      li
+        a(href=`/meals?page=${page}`)=page++
+    
+     
+  fieldset
+    a.new-meal(href="/meals/new")
+      button New Meal

@@ -1,0 +1,29 @@
+extends layout
+
+block main
+  form(action=`/meals/${meal.id}` method="post")
+      dl
+        dt
+          label(for="ingredientName") Enter a new ingredient:
+        dd
+          input(type="text"
+                name="ingredientName"
+                id="todoTitle"
+                placeholder="Ingredient Name"
+                value=ingredientName)
+        dt
+          label(for="ingredientCost") Enter the ingredient cost:
+        dd
+          input(type="text"
+                name="ingredientCost"
+                id="ingredientCost"
+                placeholder="Ingredient Cost"
+                value=ingredientCost)
+
+      fieldset.actions
+        input(type="submit" value="Save")
+        a(href=`/meals/${meal.id}`) Cancel
+
+block headerLinks
+  .actions
+    a.list(href="/meals") All Meals

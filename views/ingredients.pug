@@ -1,0 +1,47 @@
+extends layout
+
+block main
+  section#meals(class="")
+    header
+      h2= meal.name
+      ul
+        li 
+          if !meal.totalCost
+            p Total cost $ 0.00
+          else 
+            p Total cost $ #{meal.totalCost} 
+        li
+          form(action=`/meals/${meal.id}/edit` method="get")
+            button.edit(type="submit") Edit Meal Name
+        
+      
+    ul
+      each ingredient in meal.ingredients
+        li.ingredient
+          p= ingredient.name
+            p.cost Cost $ #{ingredient.cost}
+
+            form.edit-cost(action=`/meals/${meal.id}/ingredients/${ingredient.id}/edit-cost` method="get")
+              button.edit-cost(type="submit") Edit cost
+            
+            form.delete(action=`/meals/${meal.id}/ingredients/${ingredient.id}/destroy`
+                          method="post")
+              button Delete
+
+            form.edit(action=`/meals/${meal.id}/ingredients/${ingredient.id}/edit-name` method="get")
+              button.edit(type="submit") Edit ingredient Name
+             
+            
+
+  ul.pagination
+      while page < totalPage + 1
+        li 
+          a(href=`/meals/${meal.id}?page=${page}`)=page++ 
+
+  
+  a.button(href=`/meals/${meal.id}/ingredients/` class="new-ingredient") Add New Ingredient
+  
+
+block headerLinks
+  .actions
+    a.list(href="/meals") All Meals
